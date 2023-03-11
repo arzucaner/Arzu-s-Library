@@ -176,3 +176,32 @@ function isUserLoadingSuccesfully(state) {
     return state.user === null && state.loading === true && state.hasError === false;
 }
 
+// Avoilding Comments with Refactoring
+
+function getLongestStrings(inputArray) {
+    let longestWordLength = inputArray[0].length;
+
+    for (let i = 1; i < inputArray.length; i++) {
+        if(longestWordLength < inputArray[i].length) {
+            longestWordLength = inputArray[i].length;
+        }
+    }
+
+    const longestWords = inputArray.filter((word) => word.length === longestWordLength);
+    
+    return longestWords;
+}
+
+// version control / log comments
+
+function getUserName(firstName, middleName, lastName) {
+    return `${firstName} ${middleName} ${lastName}`;
+}
+
+// Avoid Visual Markers
+
+class User {
+    firstName;
+    middleName;
+    lastName;
+}
