@@ -4,7 +4,12 @@ const reviewTotalDisplay = document.querySelector('#reviews')
 
 let isOpen : boolean
 
-const reviews = [
+const reviews : {
+     name: string;
+     stars: number;
+     loyaltyUser: boolean;
+     date: string;
+} [] = [
     {
         name: 'Peter',
         stars: 5,
@@ -32,6 +37,22 @@ function showReviewTotal (value : number, reviewer: string) {
 }
 
 showReviewTotal(reviews.length, reviews[0].name)
+
+const you: {
+    firstName : string;
+    lastName: string;
+    isReturning: boolean;
+    age: number;
+    stayedAt: string[]
+} = {
+    firstName: 'Bobby',
+    lastName: 'Brown',
+    isReturning: true,
+    age: 35,
+    stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
+}
+
+console.log(you.userName)
 
 
 // Boolean
