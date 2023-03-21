@@ -1,9 +1,10 @@
-const returningUserDisplay = document.querySelector('#returning-user')
-const userNameDisplay = document.querySelector('#user')
-const reviewTotalDisplay = document.querySelector('#reviews')
+const propertyContainer = document.querySelector('properties')
+const footer = document.querySelector('.footer')
 
-let isOpen : boolean
+import { showReviewTotal, populateUser } from './utils'
+let isOpen: boolean
 
+// Reviews
 const reviews : {
      name: string;
      stars: number;
@@ -30,20 +31,13 @@ const reviews : {
     },
 ]
 
-// Strings
-
-function showReviewTotal (value : number, reviewer: string) {
-    reviewTotalDisplay.innerHTML = 'review total' + value.toString() + '| last reviewed by ' + reviewer    
-}
-
-showReviewTotal(reviews.length, reviews[0].name)
-
+// User
 const you: {
-    firstName : string;
+    firstName: string;
     lastName: string;
     isReturning: boolean;
     age: number;
-    stayedAt: string[]
+    stayedAt: string[]    
 } = {
     firstName: 'Bobby',
     lastName: 'Brown',
@@ -52,31 +46,76 @@ const you: {
     stayedAt: ['florida-home', 'oman-flat', 'tokyo-bungalow']
 }
 
-console.log(you.userName)
+// Array of Properties
+const properties : {
+    image: string;
+    title: string;
+    price: number;
+    location: {
+        firstLine: string;
+        city: string;
+        code: number;
+        country: string;        
+    };
+    contact: [ number, string ];
+    isAvailable: boolean;
+}[] = [
+    {
+        image: 'images/colombia-property.png',
+        title: 'Colombian Shack',
+        price: 45,
+        location: {
+            firstLine: 'shack 37',
+            city: 'Bogoto',
+            code: 45632,
+            country: 'Colombia'
+        },
+        contact: [+112233344556677, lilywinkle@gmail.com],
+        isAvailable: true
+    },
+    {
+        image: 'images/poland-property.png',
+        title: 'Polish Cottage',
+        price: 30,
+        location: {
+            firstLine: 'no 23',
+            city: 'Gdansk',
+            code: 343903,
+            country: 'Poland'
+        },
+        contact: [+99887766554433, amitydavis@hotmail.com],
+        isAvailable: false
+    },
+    {
+        image: 'images/london-property.png',
+        title: 'London Flat',
+        price: 23,
+        location: {
+            firstLine: 'flat 15',
+            city: 'London',
+            code: 35433,
+            country: 'United Kingdom',            
+        },
+        contact: [+1234567890, peterluger@gmail.com],
+        isAvailable: true
+    }
+]
 
-
-// Boolean
-function showReviewTotal (value : number, reviewer: string, isLoyalty : boolean) {
-    const iconDisplay = isLoyalty ? ' ' : '' 
-    reviewTotalDisplay.innerHTML = 'review total' + value.toString() + '| last reviewed by' + 
-    reviewer + ' ' + iconDisplay
-
-}
-
+// Functions
 showReviewTotal(reviews.length, reviews[0].name, reviews[0].loyaltyUser)
 
+populateUser(you.isReturning, you.firstName)
 
-// Fixing
-const you = {
-    userName: 'Bobby',
-    isReturning: true,
+// Add the properties
+for (let i = 0; i <properties.length; i++) {
+    const card = document.createElement('div')
+    card.classList.add('card')
+    card.innerHTML = properties[i].title
+    const image = document.createElement('img')
+    image.setAttribute('src', properties[i].image)
+    card.appendChild(image)
+    propertyContainer.appendChild(card)
 }
 
-function populateUser (isReturning : boolean, userName : string ) {
-    if (isReturning){
-        returningUserDisplay.innerHTML = 'back'
-    }
-    userNameDisplay.innerHTML = userName
-}
-
-populateUser(you.isReturning, you.userName)
+let currentLocation
+footer.innerHTML = currentLocation
